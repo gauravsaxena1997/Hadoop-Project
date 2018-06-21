@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Dashboard {% endblock %}
+{% block Sercivesactive %} active {% endblock %}
+
+<!-- // styles // -->
+{% block style %}  
+.main{
+  margin: 0px;
+  padding: 0px;
+}
+.img{
+    position: absolute;
+    top: 0;
+    right: 0;    
+}
+h1{
+    padding: 29px;
+}
+.card{
+    position: relative;
+    top: -35px;
+    width: 1030px;
+    height: 475px;
+    border:none;
+    padding: 25px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+    transition: 0.4s;
+}
+.card:hover {
+    box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+}
+.comment{
+    font-size: 80%;
+    color: grey;
+}
+#myDIV {
+    display:none;
+}
+{% endblock %}
+
+
+
+<!-- // body // -->
+{% block body %}
+
+
+<!--  //  ___________________________________________________________________   //     -->
+<div class="main">
+
+<h1 class="title">HDFS Cluster Setup</h1>
+<center>
+<div>
+<form action="{% url 'services:postdochadoopv1' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group row align-items-center">
+      <label class="control-label col-sm-4" for="email">Number of nodes:</label>
+      <div class="col-sm-6">
+        <input type="nodes" class="form-control" id="nodes" placeholder="No. of nodes in the cluster" name="nodes" autofocus>
+      </div>
+      <div class="col-sm-2">
+      </div>
+    </div>
+
+    <div class="form-group row align-items-center ">
+    <label class="control-label col-sm-4" for="email">Service type:</label>
+      <div class="col-sm-6">
+        <select name="service_type" class="form-control custom-select">
+          <option selected disabled >Choose One...</option>
+          <option value="nn_dn">Namenode and other Datanodes</option>
+          <option value="nnjt_dntt">Namenode and JobTracker on one machine &amp; Datanodes and TaskTracker on others</option>
+          <option value="nn_jt_dntt">Seperate Namenode and JobTracker &amp; Datanodes and TaskTracker on same machines</option>
+          <option value="nn_jt_dn_tt" onclick="myFunction()">Seperate Namenode, JobTracker, Datanodes and TaskTracker</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="myDIV" class="form-group row">
+      <div class="offset-2 col-6">
+        <input type="text" class="form-control" id="nodes" placeholder="No. of Datanodes" name="dn"><br>
+        <input type="text" class="form-control" id="nodes" placeholder="No. of Task Trackers" name="tt">
+      </div>
+    </div>
+
+    <input class="btn btn-success pl-5 pr-5 mt-5" type="submit" value="Launch">   
+
+</form>
+</div>
+</center>    
+
+</div>
+
+// <script>
+// function myFunction() {
+//     var x = document.getElementById("myDIV");
+//     if (x.style.display = "none") {
+//         x.style.display = "block";
+//     } else {
+//         x.style.display = "none";
+//     }
+// }
+// </script>
+
+{% endblock %}
+

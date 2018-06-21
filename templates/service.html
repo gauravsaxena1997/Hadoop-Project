@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Services {% endblock %}
+{% block Sercivesactive %} active {% endblock %}
+{% block style %}
+.main{
+  margin: 5px;
+  padding: 5px;
+}
+.shadow{
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+.shadow:hover{
+   box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+}
+{% endblock %}
+
+
+{% block body %}
+<div class="main row">
+    <h1 class="title" class="col-12"> Create cluster by: </h1>
+
+    <div class="row" style="width:100%">
+      <div class=" col-6 ">
+          <!-- <center><a href="services/version_docker/"><img src="{% static 'img/docker.png' %}" class="shadow" width="380px" height="380px" ></a></center> -->
+          <center><a href="{% url 'services:version_docker' %}"><img src="{% static 'img/docker.png' %}" class="shadow" width="380px" height="380px" ></a></center>
+
+      </div>
+      <div class="col-6 ">
+        <center><a href="{% url 'services:version_vm' %}"><img src="{% static 'img/vm.jpg' %}" class="shadow" width="380px" height="380px"></a></center>
+      </div>
+    </div>
+
+</div>
+{% endblock %}

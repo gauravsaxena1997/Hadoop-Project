@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Dashboard {% endblock %}
+
+<!-- // styles // -->
+{% block style %}  
+.main{
+	margin:5px;
+	padding:5px
+}
+{% endblock %}
+
+{% block Dashboardactive %} active {% endblock %}
+
+<!-- // body // -->
+{% block body %}
+<div class="main">
+Launch Name Node Portal <span class="btn"><a href="http://172.17.0.2:50070" target="_blank">Click Here</a></span><br>	
+Launch Job Tracker Portal <span class="btn"><a href="http://172.17.0.2:50030" target="_blank">Click Here</a></span>
+
+</div>
+{% endblock %}

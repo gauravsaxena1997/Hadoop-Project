@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!-- {% load staticfiles %} -->
+{% block title %} Twitter Analysis {% endblock %}
+{% block LiveStreamingactive %} active {% endblock %}
+
+{% block style %} 
+
+.content-wrapper{
+  background: url(" {% static 'img/twitterwires.jpg' %} ") no-repeat;
+  background-size: cover; 
+}
+
+ {% endblock %}
+
+{% block body %}
+
+
+  <div style=" magin:25px;padding:10px">
+    <form  action="http://127.0.0.1/cgi-bin/cluster/twitter.py" method="GET">
+        <label for="hash"><h3> Enter a keyword: </h3></label>
+        <input style="width:70%;opacity:0.9" type="text" id="hash" class="form-control" name="hash" required autofocus>
+
+        <button class="btn btn-lg btn-primary mt-5" type="submit">Analyze</button>
+    </form><!-- /form -->
+  </div>
+
+{% endblock %}

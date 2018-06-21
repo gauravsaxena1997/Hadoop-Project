@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Settings {% endblock %}
+{% block Settingsactive %} active {% endblock %}
+{% block body %}
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Settings</li>
+      </ol>
+      <h1>Settings</h1>
+      <hr>
+      <p>Toggle Fixed/Static Navbar</p>
+      <a class="btn btn-primary" href="#" id="toggleNavPosition">Apply</a>
+      <p style="padding-top:15px">Toggle Navbar Color</p>
+      <a class="btn btn-primary" href="#" id="toggleNavColor">Apply</a>
+      <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
+      <div style="height: 1000px;"></div>
+    </div>
+{% endblock %}
