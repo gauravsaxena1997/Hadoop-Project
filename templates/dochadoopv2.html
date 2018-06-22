@@ -54,8 +54,8 @@ h1{
 <h1 class="title">HDFS Cluster Setup</h1>
 <center>
 <div>
-<form action="http://127.0.0.1/cgi-bin/cluster/dochadoopv1.py" method="POST">
-    
+<form action="{% url 'services:postdochadoopv2' %}" method="POST">
+    {% csrf_token %}
     <div class="form-group row align-items-center">
       <label class="control-label col-sm-4" for="email">Number of nodes:</label>
       <div class="col-sm-4">
@@ -71,9 +71,9 @@ h1{
         <select name="service_type" class="form-control custom-select">
           <option selected disabled >Choose One...</option>
           <option value="nn_dn">Namenode and other Datanodes</option>
-          <option value="nnjt_dntt">Namenode and JobTracker on one machine &amp; Datanodes and TaskTracker on others</option>
-          <option value="nn_jt_dntt">Seperate Namenode and JobTracker &amp; Datanodes and TaskTracker on same machines</option>
-          <option value="nn_jt_dn_tt" onclick="myFunction()">Seperate Namenode, JobTracker, Datanodes and TaskTracker</option>
+          <option value="nnrm_dnnm">Namenode and Resource Mananger on one machine &amp; Datanodes and Node Mananger on others</option>
+          <option value="nn_rm_dnnm">Seperate Namenode and Resource Mananger &amp; Datanodes and Node Mananger on same machines</option>
+          <option value="nn_rm_dn_nm">Seperate Namenode, Resource Mananger, Datanodes and Node Mananger</option>
         </select>
       </div>
     </div>
