@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 
 # extra
+import os
+import subprocess as sb
 import mysql.connector as pysql
 import services.views
 
@@ -77,14 +79,37 @@ def postsignup (request):
 		return render (request, 'signup.html', {'message': message})
 
 def dashboard (request):
-	print ('Clustering is done...............')
-	# print (ip_list)
-		# hostname = sb.getoutput('sudo docker exec containe'+str(i)+' hostname')
-		# ip = os.system('sudo docker exec containe'+str(i)+' hostname -i')
-		# print ('Name: containe'+ str(i)+ '\t\t IP: ' +str(ip)+ '\t\t Container_Id: '+ hostname)
-		# fhand = open("/etc/ansible/hosts","a+")
-		# fhand.write(ps)
-	return render (request, 'dashboard.html')
+	print ('Dashboard is here...............')
+	status = request.session.get('status')
+	if ( status == None ):                                                                                 #-- There are no clusters
+		container_name = request.session.get('container_name')
+		if ( container_name == None ):
+			no_cluster = "No Cluster"
+			return render (request, 'dashboard.html', {'no_cluster':no_cluster})
+
+		else:                                                                                              #-- Everything works fine
+			container_id = request.session.get('container_id')
+			ip_list = request.session.get('ip_list')
+			service_type = request.session.get('service_type')
+			container_type = request.session.get('container_type')
+			print(service_type)
+			all_details = zip(container_name,ip_list,container_id,container_type)
+			cluster = "Cluster is here."
+			return render (request, 'dashboard.html',{ 'all_details' : all_details , 'cluster':cluster , 'service_type':service_type})
+
+	elif ( status == 'clear' ):                                                                           #-- Cleaing up whole cluster
+		request.session['status'] = None
+		container_name = request.session.get('container_name')
+		container_id = request.session.get('container_id')
+		ip_list = request.session.get('ip_list')
+		request.session['container_name'] = None
+		request.session['container_id'] = None
+		request.session['ip_list'] = None
+		request.session['container_type'] = None
+		print('Cluster clear')
+		message = "Cluster is cleared"
+		request.session['message'] = message
+		return render (request, 'dashboard.html',{'message':message})
 
 def twitter (request):
 	return render (request, 'twitter.html')
@@ -94,3 +119,9 @@ def about (request):
 
 def settings (request):
 	return render (request, 'settings.html')
+
+def clear_cluster (request):
+	sb.getoutput ('docker kill $(docker ps -qa)')
+	sb.getoutput ('docker rm $(docker ps -qa)')
+	request.session['status'] = 'clear'
+	return redirect('/dashboard/')

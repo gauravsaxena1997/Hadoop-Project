@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^twitter/$', views.twitter, name='twitter'),
     url(r'^about/$', views.about, name='about'),
     url(r'^settings/$', views.settings, name='settings'),
-
-    # url(r'^services/', include('services.urls') )
+    
+    # Dashboard
+    url(r'^clear_cluster/$', views.clear_cluster, name='clear_cluster'),
 
 ]

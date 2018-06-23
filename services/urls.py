@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^dochadoopv2/$', views.dochadoopv2, name='dochadoopv2'),
     url(r'^postdochadoopv2/$', views.postdochadoopv2, name='postdochadoopv2'),
     url(r'^dochv2_playbook/$', views.dochv2_playbook, name='dochv2_playbook'),
+
+    
     
 ]
