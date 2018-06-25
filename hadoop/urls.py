@@ -8,7 +8,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('cluster.urls')),
-    url(r'^services/', include('services.urls') )
+    url(r'^services/', include('services.urls') ),
+    url(r'^twitter/', include('twitter.urls') ),
     
 ]
 

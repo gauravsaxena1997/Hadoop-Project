@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cluster',
     'services',
+    'twitter',
 ]
 
 MIDDLEWARE_CLASSES = [

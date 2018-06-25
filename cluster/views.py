@@ -80,39 +80,42 @@ def postsignup (request):
 
 def dashboard (request):
 	print ('Dashboard is here...............')
-	status = request.session.get('status')
-	if ( status == None ):                                                                                 #-- There are no clusters
-		container_name = request.session.get('container_name')
-		if ( container_name == None ):
-			no_cluster = "No Cluster"
-			return render (request, 'dashboard.html', {'no_cluster':no_cluster})
+	container_name = request.session.get('container_name')
+	if ( container_name == None ):
+		no_cluster = "No Cluster"
+		return render (request, 'dashboard.html', {'no_cluster':no_cluster})
 
-		else:                                                                                              #-- Everything works fine
-			container_id = request.session.get('container_id')
-			ip_list = request.session.get('ip_list')
-			service_type = request.session.get('service_type')
-			container_type = request.session.get('container_type')
-			print(service_type)
-			all_details = zip(container_name,ip_list,container_id,container_type)
-			cluster = "Cluster is here."
-			return render (request, 'dashboard.html',{ 'all_details' : all_details , 'cluster':cluster , 'service_type':service_type})
-
-	elif ( status == 'clear' ):                                                                           #-- Cleaing up whole cluster
-		request.session['status'] = None
-		container_name = request.session.get('container_name')
+	else:                                                                                              #-- Everything works fine
+		index_value = request.session.get('index_value')
+		service_type = request.session.get('service_type')
 		container_id = request.session.get('container_id')
 		ip_list = request.session.get('ip_list')
-		request.session['container_name'] = None
-		request.session['container_id'] = None
-		request.session['ip_list'] = None
-		request.session['container_type'] = None
-		print('Cluster clear')
-		message = "Cluster is cleared"
-		request.session['message'] = message
-		return render (request, 'dashboard.html',{'message':message})
+		container_type = request.session.get('container_type')
+		service_status = request.session.get('service_status')
+		cluster = "Cluster"
+		all_details = zip(index_value,container_name,ip_list,container_id,container_type,service_status)
+		return render (request, 'dashboard.html',
+			{'all_details':all_details ,'cluster':cluster,'service_type':service_type})
 
-def twitter (request):
-	return render (request, 'twitter.html')
+def service_status (request):
+	service_status = request.session.get('service_status')
+	reference_var = request.GET['reference_var']
+	index = int(request.GET['index'])
+	service_type = request.GET['type']
+	service_type = service_type.split('&')
+	if (len(service_type) == 1):
+		if (service_status[index] == 'Running'): 
+			os.system('sudo docker exec '+reference_var+' hadoop-daemon.sh stop '+service_type[0])
+			service_status[index] = 'Stopped'
+		else:
+			os.system('sudo docker exec '+reference_var+' hadoop-daemon.sh start '+service_type[0])
+			service_status[index] = 'Running'
+	else:
+		print(service_type)
+		print('two')
+	print (service_status)
+	request.session['service_status'] = service_status
+	return redirect ('/dashboard/')
 
 def about (request):
 	return render (request, 'about.html')
@@ -123,5 +126,18 @@ def settings (request):
 def clear_cluster (request):
 	sb.getoutput ('docker kill $(docker ps -qa)')
 	sb.getoutput ('docker rm $(docker ps -qa)')
-	request.session['status'] = 'clear'
-	return redirect('/dashboard/')
+	container_name = request.session.get('container_name')
+	container_id = request.session.get('container_id')
+	ip_list = request.session.get('ip_list')
+	service_status = request.session.get('service_status')
+	index_value = request.session.get('index_value')
+	request.session['container_name'] = None
+	request.session['container_id'] = None
+	request.session['ip_list'] = None
+	request.session['container_type'] = None
+	request.session['index_value'] = None
+	request.session['service_status'] = None
+	message = "Cluster is cleared"
+	request.session['message'] = message
+	return render (request, 'dashboard.html',{'message':message})
+

@@ -52,6 +52,7 @@
   margin: 5px;
   padding: 5px;
 }
+
 .content-wrapper{
   background: url('{% static "img/back-3.jpg" %}') no-repeat ;
   background-size: cover
@@ -70,7 +71,7 @@
 
     <div class="col-6">
     <center>
-        <a href="http://127.0.0.1/cluster/vmhadoopv1.html" class="card card-block">
+        <a href="{% url 'services:vmhadoopv1' %}" class="card card-block">
           <img src="{% static 'img/bigdata-1.jpg' %}">
           <div class="btnn">Hadoop version 1</div>
           </a>
@@ -79,12 +80,13 @@
 
     <div class="col-6">
     <center>
-        <a href="http://127.0.0.1/cluster/vmhadoopv2.html" class="card card-block">
+        <a href="{% url 'services:vmhadoopv2' %}" class="card card-block">
           <img src="{% static 'img/bigdata-1.jpg' %}">
           <div class="btnn">Hadoop version 2</div>
           </a>
     </center>
     </div>
 </div>
+
 {% endblock %}
 

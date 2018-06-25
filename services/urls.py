@@ -18,11 +18,16 @@ urlpatterns = [
     url(r'^postdochadoopv1/$', views.postdochadoopv1, name='postdochadoopv1'),
     url(r'^dochv1_playbook/$', views.dochv1_playbook, name='dochv1_playbook'),
    
-    # Docker hadoop version1
+    # Docker hadoop version2
     url(r'^dochadoopv2/$', views.dochadoopv2, name='dochadoopv2'),
     url(r'^postdochadoopv2/$', views.postdochadoopv2, name='postdochadoopv2'),
     url(r'^dochv2_playbook/$', views.dochv2_playbook, name='dochv2_playbook'),
 
+    # VM hadoop version1
+    url(r'^vmhadoopv1/$', views.vmhadoopv1, name='vmhadoopv1'),
+    url(r'^postvmhadoopv1/$', views.postvmhadoopv1, name='postvmhadoopv1'),
+    # url(r'^vmhv1_playbook/$', views.vmhv1_playbook, name='vmhv1_playbook'),
     
-    
+        # VM hadoop version2
+    url(r'^vmhadoopv2/$', views.vmhadoopv2, name='vmhadoopv2'),
 ]

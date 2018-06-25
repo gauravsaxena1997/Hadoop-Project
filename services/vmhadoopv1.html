@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Dashboard {% endblock %}
+{% block Sercivesactive %} active {% endblock %}
+
+<!-- // styles // -->
+{% block style %}  
+.main{
+  margin: 0px;
+  padding: 0px;
+}
+.img{
+    position: absolute;
+    top: 0;
+    right: 0;    
+}
+h1{
+    padding: 29px;
+}
+.card{
+    position: relative;
+    top: -35px;
+    width: 1030px;
+    height: 475px;
+    border:none;
+    padding: 25px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+    transition: 0.4s;
+}
+.card:hover {
+    box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+}
+.comment{
+    font-size: 80%;
+    color: grey;
+}
+#myDIV {
+    display:none;
+}
+
+.spinner {
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+
+@keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+
+{% endblock %}
+
+
+
+<!-- // body // -->
+{% block body %}
+
+
+<!--  //  ___________________________________________________________________   //     -->
+<div class="main">
+
+<h1 class="title">HDFS Cluster Setup</h1>
+<center>
+<div>
+<form action="{% url 'services:postdochadoopv1' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group row align-items-center">
+      <label class="control-label col-sm-4" for="email">Number of nodes:</label>
+      <div class="col-sm-6">
+        <input type="nodes" class="form-control" id="nodes" placeholder="No. of nodes in the cluster" name="nodes" autofocus>
+      </div>
+      <div class="col-sm-2">
+      </div>
+    </div>
+
+    <div class="form-group row align-items-center ">
+    <label class="control-label col-sm-4" for="email">Service type:</label>
+      <div class="col-sm-6">
+        <select name="service_type" class="form-control custom-select">
+          <option selected disabled >Choose One...</option>
+          <option value="nn_dn">Namenode and other Datanodes</option>
+          <option value="nnjt_dntt">Namenode and JobTracker on one machine &amp; Datanodes and TaskTracker on others</option>
+          <option value="nn_jt_dntt">Seperate Namenode and JobTracker &amp; Datanodes and TaskTracker on same machines</option>
+          <option value="nn_jt_dn_tt">Seperate Namenode, JobTracker, Datanodes and TaskTracker</option>
+        </select>
+      </div>
+    </div>
+
+
+    <input class="btn btn-success pl-5 pr-5 mt-5" onclick="myFunction()" type="submit" value="Launch">   
+    
+    <div id="myDIV" class="form-group row">
+          <center><h2  class="mt-5 title">Launching Containers.......</h2> 
+          <span class="container">
+            <svg class="spinner" width="35px" height="35px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </span>
+    </div></center>
+    </div>
+
+</form>
+</div>
+</center>    
+
+</div>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display = "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+
+{% endblock %}
+

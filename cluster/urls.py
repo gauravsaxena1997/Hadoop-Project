@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^postsignup/$', views.postsignup, name='postsignup'),
     url(r'^postsignin/$', views.postsignin, name='postsignin'),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
-    url(r'^twitter/$', views.twitter, name='twitter'),
+    url(r'^service_status/$', views.service_status, name='service_status'),
     url(r'^about/$', views.about, name='about'),
     url(r'^settings/$', views.settings, name='settings'),
     

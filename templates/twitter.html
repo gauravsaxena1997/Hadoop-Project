@@ -14,14 +14,24 @@
 
 {% block body %}
 
+<h1 class="title ml-4">Twitter Sentimental Analysis</h1><hr>
 
-  <div style=" magin:25px;padding:10px">
-    <form  action="http://127.0.0.1/cgi-bin/cluster/twitter.py" method="GET">
-        <label for="hash"><h3> Enter a keyword: </h3></label>
-        <input style="width:70%;opacity:0.9" type="text" id="hash" class="form-control" name="hash" required autofocus>
+<div class="container m-5 ">
+	<form method="GET" action="{% url 'twitter:analyse' %}">
+	{% csrf_token %}
+	  <div class="form-group row">
+        <label class="title col-3"><h3>Enter a keyword: </h3></label>
+    	<input class="offset-1 col-5" style="opacity:0.8" name= "hash" autofocus>
+	  </div>
 
-        <button class="btn btn-lg btn-primary mt-5" type="submit">Analyze</button>
-    </form><!-- /form -->
-  </div>
+	  <div class="form-group row">
+        <label class="title col-3"><h3>No. of tweets: </h3></label>
+    	<input class="offset-1 col-5" style="opacity:0.8" name= "no_of_tweets" >
+      </div>
+
+	  <button type="submit" class="mt-5 btn btn-info btn-lg">Analyze</button>
+	</form>
+</div>
+
 
 {% endblock %}
