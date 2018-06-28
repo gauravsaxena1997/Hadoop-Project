@@ -82,13 +82,16 @@ def dashboard (request):
 	print ('Dashboard is here...............')
 	container_name = request.session.get('container_name')
 	vm = request.session.get('vm')
+	print (vm)
 
-	if ( container_name == None ):
+	if ( container_name == None and vm == None):
 		no_cluster = "No Cluster"
 		return render (request, 'dashboard.html', {'no_cluster':no_cluster})
 
-	elif (vm == 'vm'):
+	elif (container_name == None and vm == 'vm'):
+		
 		vm = "VM based Cluster"
+		print(vm)
 		return render (request, 'dashboard.html', {'vm':vm})
 
 	else:                                                                                              #-- Everything works fine
