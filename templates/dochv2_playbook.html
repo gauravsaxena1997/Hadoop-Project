@@ -7,7 +7,7 @@
 window.setTimeout(function(){
 
     // Move to a new location or you can do something else
-    window.location.href = "{% url 'cluster:dashboard' %}";
+    window.location.href = "{% url 'basic:dashboard' %}";
 
 }, 20000);
     </script>
@@ -186,7 +186,7 @@ window.setTimeout(function(){
 <!-- // body // -->
 {% block body %}
 	
-<meta http-equiv='refresh' content="0;{% url 'services:dochv2_playbook' %}">
+<meta http-equiv='refresh' content="0;{% url 'docker:hv2_playbook' %}">
 	
 
 <div class="container">

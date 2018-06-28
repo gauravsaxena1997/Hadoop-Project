@@ -170,14 +170,14 @@
 </video> 
 <!-- End Video Overlay -->
 
-<div type="button" class="signup btn btn-md"><a href="{% url 'cluster:signup' %}" style="color:white;text-decoration:none">Signup</a></div>
+<div type="button" class="signup btn btn-md"><a href="{% url 'basic:signup' %}" style="color:white;text-decoration:none">Signup</a></div>
 
 <div class="container">
     <div class="card card-container">
         <img id="profile-img" class="profile-img-card" src="{% static 'img/adhoc.jpg' %}" />
         <p id="profile-name" class="profile-name-card"></p>
         
-        <form  action="{% url 'cluster:postsignin' %}" class="form-signin" method="POST">
+        <form  action="{% url 'basic:postsignin' %}" class="form-signin" method="POST">
             {% csrf_token %}
             <span id="reauth-email" class="reauth-email"></span>
             <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>

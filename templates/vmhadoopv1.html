@@ -154,7 +154,7 @@ h1{
 <h1 class="title">HDFS Cluster Setup</h1>
 <center>
 <div>
-<form action="{% url 'services:postvmhadoopv1' %}" method="POST">
+<form action="{% url 'vm:posthadoopv1' %}" method="POST">
     {% csrf_token %}
     <div class="form-group row align-items-center">
       <label class="control-label col-sm-4" for="email">Number of nodes:</label>
@@ -192,8 +192,7 @@ h1{
           <option selected disabled >Choose One...</option>
           <option value="nn_dn">Namenode and other Datanodes</option>
           <option value="nnjt_dntt">Namenode and JobTracker on one machine &amp; Datanodes and TaskTracker on others</option>
-          <option value="nn_jt_dntt">Seperate Namenode and JobTracker &amp; Datanodes and TaskTracker on same machines</option>
-          <option value="nn_jt_dn_tt">Seperate Namenode, JobTracker, Datanodes and TaskTracker</option>
+          <!-- <option value="nn_jt_dntt">Seperate Namenode and JobTracker &amp; Datanodes and TaskTracker on same machines</option> -->
         </select>
       </div>
     </div>

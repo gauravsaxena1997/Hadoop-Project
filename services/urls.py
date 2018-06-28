@@ -26,8 +26,12 @@ urlpatterns = [
     # VM hadoop version1
     url(r'^vmhadoopv1/$', views.vmhadoopv1, name='vmhadoopv1'),
     url(r'^postvmhadoopv1/$', views.postvmhadoopv1, name='postvmhadoopv1'),
-    # url(r'^vmhv1_playbook/$', views.vmhv1_playbook, name='vmhv1_playbook'),
+    url(r'^loading_vm_hv1/$', views.loading_vm_hv1, name='loading_vm_hv1'),
+    url(r'^vmhv1_playbook/$', views.vmhv1_playbook, name='vmhv1_playbook'),
     
-        # VM hadoop version2
+    # VM hadoop version2
     url(r'^vmhadoopv2/$', views.vmhadoopv2, name='vmhadoopv2'),
+    url(r'^postvmhadoopv2/$', views.postvmhadoopv2, name='postvmhadoopv2'),
+    url(r'^loading_vm_hv2/$', views.loading_vm_hv2, name='loading_vm_hv2'),
+    url(r'^vmhv2_playbook/$', views.vmhv2_playbook, name='vmhv2_playbook'),
 ]

@@ -154,7 +154,7 @@ h1{
 <h1 class="title">HDFS Cluster Setup</h1>
 <center>
 <div>
-<form action="{% url 'services:postdochadoopv1' %}" method="POST">
+<form action="{% url 'docker:posthadoopv1' %}" method="POST">
     {% csrf_token %}
     <div class="form-group row align-items-center">
       <label class="control-label col-sm-4" for="email">Number of nodes:</label>
@@ -182,13 +182,14 @@ h1{
     <input class="btn btn-success pl-5 pr-5 mt-5" onclick="myFunction()" type="submit" value="Launch">   
     
     <div id="myDIV" class="form-group row">
-          <center><h2  class="mt-5 title">Launching Containers.......</h2> 
-          <span class="container">
-            <svg class="spinner" width="35px" height="35px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-            </svg>
-          </span>
-    </div></center>
+      <center>
+        <h2  class="mt-5 title">Launching Containers.......</h2> 
+        <span class="container">
+          <svg class="spinner" width="35px" height="35px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </span>
+      </center>
     </div>
 
 </form>

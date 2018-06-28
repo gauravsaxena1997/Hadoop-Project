@@ -7,10 +7,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('cluster.urls')),
-    url(r'^services/', include('services.urls') ),
+    url(r'^', include('basic.urls')),
+    url(r'^docker/', include('docker.urls') ),
+    url(r'^vm/', include('vm.urls') ),
     url(r'^twitter/', include('twitter.urls') ),
-    
+    url(r'^hdfs/', include('hdfs.urls') ),
+
 ]
 
 

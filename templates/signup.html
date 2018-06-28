@@ -88,7 +88,7 @@ html,body{
 		</div>
 		<br>
 		<div class="container">
-			<form action="{% url 'cluster:postsignup' %}" method="POST">
+			<form action="{% url 'basic:postsignup' %}" method="POST">
                 {% csrf_token %}
 				<div class="form-group">
 				  <label for="name">Name:</label>
@@ -112,7 +112,7 @@ html,body{
 				</center>
 			</form>
 			<br>
-			<p class="signin"> Already have an account <a href="{% url 'cluster:index' %}"> Sign in </a> </p>
+			<p class="signin"> Already have an account <a href="{% url 'basic:index' %}"> Sign in </a> </p>
 		</div>
 
 	</div>

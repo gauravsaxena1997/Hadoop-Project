@@ -81,9 +81,15 @@ def postsignup (request):
 def dashboard (request):
 	print ('Dashboard is here...............')
 	container_name = request.session.get('container_name')
+	vm = request.session.get('vm')
+
 	if ( container_name == None ):
 		no_cluster = "No Cluster"
 		return render (request, 'dashboard.html', {'no_cluster':no_cluster})
+
+	elif (vm == 'vm'):
+		vm = "VM based Cluster"
+		return render (request, 'dashboard.html', {'vm':vm})
 
 	else:                                                                                              #-- Everything works fine
 		index_value = request.session.get('index_value')
@@ -92,10 +98,10 @@ def dashboard (request):
 		ip_list = request.session.get('ip_list')
 		container_type = request.session.get('container_type')
 		service_status = request.session.get('service_status')
-		cluster = "Cluster"
+		docker = "docker"
 		all_details = zip(index_value,container_name,ip_list,container_id,container_type,service_status)
 		return render (request, 'dashboard.html',
-			{'all_details':all_details ,'cluster':cluster,'service_type':service_type})
+			{'all_details':all_details ,'docker':docker,'service_type':service_type})
 
 def service_status (request):
 	service_status = request.session.get('service_status')
@@ -119,6 +125,9 @@ def service_status (request):
 
 def about (request):
 	return render (request, 'about.html')
+
+def create (request):
+	return render (request, 'service.html')
 
 def settings (request):
 	return render (request, 'settings.html')

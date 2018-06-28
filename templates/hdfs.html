@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Dashboard {% endblock %}
+
+<!-- // styles // -->
+{% block style %}  
+
+{% endblock %}
+
+{% block Dashboardactive %} active {% endblock %}
+
+<!-- // body // -->
+{% block body %}
+
+        <form  action="{% url 'hdfs:phdfs' %}" method="POST">
+            {% csrf_token %}
+       		<div class="form-group row">
+	            <label for="from" class="col-col-2 offset-1">put:</label>
+	            <input type="text" class="col-col-2 offset-1" id="from"  placeholder="from" class="form-control" name="from" required autofocus>
+	            <input type="text" class="col-col-2 offset-1" id="to" class="form-control" placeholder="to"  name="to" required>
+	            <button class="btn btn-lg btn-primary btn-block btn-signin col-2 offset-1" type="submit">Upload</button>
+			</div>
+
+        </form><!-- /form -->
+
+{% endblock %}

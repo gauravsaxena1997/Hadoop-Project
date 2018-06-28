@@ -43,15 +43,21 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item {% block Dashboardactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="{% url 'cluster:dashboard' %}">
+          <a class="nav-link" href="{% url 'basic:dashboard' %}">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
         <li class="nav-item {% block Sercivesactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Sercives">
-          <a class="nav-link" href="{% url 'services:services' %}">
+          <a class="nav-link" href="{% url 'basic:create' %}">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">HDFS Service</span>
+          </a>
+        </li>
+        <li class="nav-item {% block Opactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Analytics">
+          <a class="nav-link" href="{% url 'hdfs:hdfs' %}">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">HDFS Operation</span>
           </a>
         </li>
         <li class="nav-item {% block Analyticsactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Analytics">
@@ -67,13 +73,13 @@
           </a>
         </li>
         <li class="nav-item {% block Aboutactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="About">
-          <a class="nav-link" href="{% url 'cluster:about' %}">
+          <a class="nav-link" href="{% url 'basic:about' %}">
             <i class="fa fa-fw fa-info-circle"></i>
             <span class="nav-link-text">About</span>
           </a>
         </li>
         <li class="nav-item {% block Settingsactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Settings">
-          <a class="nav-link" href="{% url 'cluster:settings' %}">
+          <a class="nav-link" href="{% url 'basic:settings' %}">
             <i class="fa fa-fw fa-cog"></i>
             <span class="nav-link-text">Settings</span>
           </a>
@@ -100,7 +106,7 @@
           </form>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <a class="nav-link" data-toggle="modal" data-target="#Logout">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
@@ -127,7 +133,7 @@
       <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="Logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -139,7 +145,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="{% url 'cluster:index' %}">Logout</a>
+            <a class="btn btn-primary" href="{% url 'basic:index' %}">Logout</a>
           </div>
         </div>
       </div>

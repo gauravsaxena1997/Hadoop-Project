@@ -6,7 +6,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-app_name = 'cluster'
+app_name = 'basic'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^service_status/$', views.service_status, name='service_status'),
     url(r'^about/$', views.about, name='about'),
     url(r'^settings/$', views.settings, name='settings'),
+    url(r'^create/$', views.create, name='create'),
     
     # Dashboard
     url(r'^clear_cluster/$', views.clear_cluster, name='clear_cluster'),

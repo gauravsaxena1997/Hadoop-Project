@@ -22,7 +22,12 @@
 {% endif %}
 
 
-{% if cluster %}
+{% if vm %}
+	<h1>VM</h1>
+{% endif %}
+
+
+{% if docker %}
 <div class="main">
 <h3 class="title"> Details: </h3>
 <table id="mytable" class="table table-bordred table-striped" style="text-align:center">                   
@@ -44,7 +49,7 @@
 	    <td>{{container_id}}</td>
 	    <td>{{container_type}}</td>
 	    <td>
-	    <form action="{% url 'cluster:service_status' %}" method="GET">
+	    <form action="{% url 'basic:service_status' %}" method="GET">
 	    {% csrf_token %}
 	    <input type="hidden" name="index" value="{{index_value}}">
 	    <input type="hidden" name="type" value="{{container_type}}">
@@ -92,14 +97,12 @@
       <div class="modal-body">You are about to clear the whole cluster.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="{% url 'cluster:clear_cluster' %}">Confirm</a>
+        <a class="btn btn-primary" href="{% url 'basic:clear_cluster' %}">Confirm</a>
       </div>
     </div>
   </div>
 </div>
 
-
 {% endblock %}
 
 
-<!-- onclick="location.href='{% url 'cluster:clear_cluster' %}'" -->
