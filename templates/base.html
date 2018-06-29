@@ -48,18 +48,26 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item {% block Sercivesactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Sercives">
-          <a class="nav-link" href="{% url 'basic:create' %}">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">HDFS Service</span>
+
+        <li class="nav-item {% block Sercivesactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+          <i class="fa fa-hdd-o fa-lg" aria-hidden="true"></i>
+            <span class="nav-link-text">HDFS</span>
           </a>
         </li>
-        <li class="nav-item {% block Opactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Analytics">
-          <a class="nav-link" href="{% url 'hdfs:hdfs' %}">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">HDFS Operation</span>
-          </a>
-        </li>
+        <li class="nav-item ">
+          <ul class="sidenav-second-level collapse" id="collapseMulti">
+            <li>
+              <a href="{% url 'basic:create' %}"><i class="fa fa-plus" aria-hidden="true"></i> Create new cluster</a>
+            </li>
+            <li>
+              <a href="{% url 'hdfs:hdfs' %}"><i class="fa fa-cloud-upload" aria-hidden="true"></i> HDFS Operations</a>
+            </li>
+            <li>
+              <a href="#"> <i class="fa fa-filter" aria-hidden="true"></i> MR / YARN</a>
+            </li>
+          </ul>
+          </li>
         <li class="nav-item {% block Analyticsactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Analytics">
           <a class="nav-link" href="charts.html">
             <i class="fa fa-fw fa-area-chart"></i>
