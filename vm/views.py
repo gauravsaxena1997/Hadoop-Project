@@ -25,6 +25,7 @@ def posthadoopv1 (request):
 	ram = request.POST ['ram']
 	cpu = request.POST ['cpu']
 	service_type = request.POST ['service_type']
+	request.session['nodes'] = nodes
 	request.session['service_type'] = service_type
 	for i in range (1, int(nodes)+1):
 		os.system('sudo qemu-img create -f qcow2 -b /var/lib/libvirt/images/hadoopv1.qcow2 /var/lib/libvirt/images/node'+str(i)+'.qcow2')
@@ -34,11 +35,11 @@ def posthadoopv1 (request):
 def loading_hv1 (request):
 	service_type = request.session.get('service_type')
 	fhand = open("/etc/ansible/hosts","a+")
-	ip_list = []
-	service_provided = []
+	ip_list,service_provided,service_status = ([] for i in range(3))
 	ip_list.append('192.168.122.1')
 	if ( service_type == 'nn_dn' or service_type == 'nn_jt_dntt'):
 		service_provided.append('namenode')
+		service_status.append('Running')
 	elif ( service_type == 'nnjt_dntt' ):
 		service_provided.append('namenode & jobtracker')
 		fhand.write('\n[vm-jt]\n')
@@ -70,8 +71,14 @@ def loading_hv1 (request):
 				fhand.write('\n[vm-dn]\n')
 				fhand.write(ip+'\n')
 				container_type.append('datanode & tasktracker')
+		
+		service_status.append('Running')
+	request.session['ip_list'] = ip_list
+	request.session['service_provided'] = service_provided
+	request.session['service_status'] = service_status
 	fhand.close()
 	print(service_provided)
+	print(service_status)
 	return render (request, 'vmhv1_playbook.html')
 
 def hv1_playbook (request):
@@ -99,6 +106,7 @@ def posthadoopv2 (request):
 	ram = request.POST ['ram']
 	cpu = request.POST ['cpu']
 	service_type = request.POST ['service_type']
+	request.session['nodes'] = nodes
 	request.session['service_type'] = service_type
 	for i in range (1, int(nodes)+1):
 		os.system('sudo qemu-img create -f qcow2 -b /var/lib/libvirt/images/hadoopv2.qcow2 /var/lib/libvirt/images/node'+str(i)+'.qcow2')
@@ -161,3 +169,20 @@ def hv2_playbook (request):
 	# print("Cleaning hosts")
 	# open('/etc/ansible/hosts', 'w').close()
 	return HttpResponse(status=201)
+
+def clear_cluster (request):
+	service_type = request.session.get('service_type')
+	nodes = request.session.get('nodes')
+	print (nodes)
+	print (service_type)
+	for i in range (1, int(nodes)+1):
+		os.system('virsh destroy node'+str(i))
+		os.system('virsh undefine node'+str(i)+' --remove-all-storage')
+		os.system('rm /var/lib/libvirt/images/node'+str(i)+'.qcow2 ')
+	request.session['vm'] = None
+	request.session['ip_list'] = None
+	request.session['service_provided'] = None
+	request.session['service_status'] = None
+	message = "Cluster is cleared"
+	request.session['message'] = message
+	return render (request, 'dashboard.html',{'message':message})

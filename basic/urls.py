@@ -20,6 +20,6 @@ urlpatterns = [
     url(r'^create/$', views.create, name='create'),
     
     # Dashboard
-    url(r'^clear_cluster/$', views.clear_cluster, name='clear_cluster'),
+
 
 ]

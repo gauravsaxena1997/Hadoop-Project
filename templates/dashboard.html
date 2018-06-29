@@ -15,18 +15,58 @@
 {% block body %}
 <!-- /////////////////////// body ///////////////////// -->
 
-{% if message %}
-	<script type="text/javascript">
-	alert( "{{message}}" );
-	</script>
+{% if no_cluster %}
+<center><h1 class="title mt-5"> No cluster is currently running... </h1></center>
 {% endif %}
 
+
+<!-- ------------------------------------------------------ vm ------------------------------------------------>
 
 {% if vm %}
-	<h1>VM</h1>
+<div class="main">
+<h3 class="title"> Details: </h3>
+<table id="mytable" class="table table-bordred table-striped" style="text-align:center">                   
+	<thead>
+		<th>IP</th>
+		<th>Service Provided</th>
+		<th>Status</th>  
+	</thead>
+	<tbody>
+	    
+{% for  ip_list,service_provided,service_status in all_details %}  
+	<tr>
+	    <td>{{ip_list}}	</td>
+	    <td>{{service_provided}}</td>
+	    <td>
+	    <form action="{% url 'basic:service_status' %}" method="GET">
+	    {% csrf_token %}
+	    <input type="hidden" name="index" value="{{index_value}}">
+	    <input type="hidden" name="type" value="{{container_type}}">
+    	<button type="submit" class="btn btn-info" name="reference_var" value="{{container_name}}"> {{service_status}} </button>
+	    </form>
+	    </td>
+	</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<h3 class="title"> Operations: </h3>
+
+	<ul class="list-group">
+	  <li class="list-group-item"><a href="http://192.168.122.1:50070" target="_blank">Launch Name Node Portal</a></li>
+	  {% if service_type == 'nnjt_dntt' %}
+	  <li class="list-group-item"><a href="http://172.17.0.2:50030" target="_blank">Launch Job Tracker Portal</a></li>
+      {% endif %}
+	  {% if service_type == 'nn_jt_dntt' or service_type == 'nn_jt_dn_tt' %}
+	  <li class="list-group-item"><a href="http://172.17.0.3:50030" target="_blank">Launch Job Tracker Portal</a></li>
+	  {% endif %}
+	  <li class="list-group-item text-danger" style="cursor:pointer" data-toggle="modal" data-target="#vmclear" >Clear whole Cluster</li>
+	</ul>
+
+</div>
 {% endif %}
 
-
+<!-- ------------------------------------------------------ docker ------------------------------------------------>
 {% if docker %}
 <div class="main">
 <h3 class="title"> Details: </h3>
@@ -77,10 +117,6 @@
 </div>
 {% endif %}
 
-{% if no_cluster %}
-<center><h1 class="title mt-5"> No cluster is currently running... </h1></center>
-{% endif %}
-
 
 
 
@@ -97,7 +133,25 @@
       <div class="modal-body">You are about to clear the whole cluster.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="{% url 'basic:clear_cluster' %}">Confirm</a>
+        <a class="btn btn-primary" href="{% url 'docker:clear_cluster' %}">Confirm</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="vmclear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Clear Cluster</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">You are about to clear the whole VM based cluster.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="{% url 'vm:clear_cluster' %}">Confirm</a>
       </div>
     </div>
   </div>

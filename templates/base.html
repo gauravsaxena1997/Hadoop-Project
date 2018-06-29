@@ -49,7 +49,7 @@
           </a>
         </li>
 
-        <li class="nav-item {% block Sercivesactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+        <li class="nav-item {% block HDFSactive %}  {% endblock %}" data-toggle="tooltip" data-placement="right" title="Menu Levels">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
           <i class="fa fa-hdd-o fa-lg" aria-hidden="true"></i>
             <span class="nav-link-text">HDFS</span>
@@ -57,11 +57,11 @@
         </li>
         <li class="nav-item ">
           <ul class="sidenav-second-level collapse" id="collapseMulti">
-            <li>
-              <a href="{% url 'basic:create' %}"><i class="fa fa-plus" aria-hidden="true"></i> Create new cluster</a>
+            <li  class="{% block Createactive %}  {% endblock %}">
+              <a href="{% url 'basic:create' %}"><i class="fa fa-plus fa-lg" aria-hidden="true"></i> Create new cluster</a>
             </li>
-            <li>
-              <a href="{% url 'hdfs:hdfs' %}"><i class="fa fa-cloud-upload" aria-hidden="true"></i> HDFS Operations</a>
+            <li class="{% block Clientactive %}  {% endblock %}">
+              <a href="{% url 'client:index' %}"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i> Hadoop Client</a>
             </li>
             <li>
               <a href="#"> <i class="fa fa-filter" aria-hidden="true"></i> MR / YARN</a>
@@ -102,7 +102,8 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
+          <!-- <h4 class="title  my-2 my-lg-0 mr-lg-2 text-secondary">Gaurav Saxena</h4> -->
+<!--           <form class="form-inline my-2 my-lg-0 mr-lg-2">
             <div class="input-group">
               <input class="form-control" type="text" placeholder="Search for...">
               <span class="input-group-append">
@@ -111,7 +112,7 @@
                 </button>
               </span>
             </div>
-          </form>
+          </form> -->
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#Logout">

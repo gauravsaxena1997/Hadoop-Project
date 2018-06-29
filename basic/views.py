@@ -10,8 +10,6 @@ from django.core.urlresolvers import reverse
 import os
 import subprocess as sb
 import mysql.connector as pysql
-import services.views
-
 
 
 def index (request):
@@ -82,17 +80,24 @@ def dashboard (request):
 	print ('Dashboard is here...............')
 	container_name = request.session.get('container_name')
 	vm = request.session.get('vm')
+
 	print (vm)
 
 	if ( container_name == None and vm == None):
+		request.session['client'] = None
 		no_cluster = "No Cluster"
+		request.session['no_cluster'] = no_cluster
 		return render (request, 'dashboard.html', {'no_cluster':no_cluster})
 
 	elif (container_name == None and vm == 'vm'):
-		
+		ip_list = request.session.get('ip_list')
+		service_provided = request.session.get('service_provided')	
+		service_status = request.session.get('service_status')	
+		all_details = zip(ip_list,service_provided,service_status)
+		request.session['no_cluster'] = 'cluster_existed'
 		vm = "VM based Cluster"
 		print(vm)
-		return render (request, 'dashboard.html', {'vm':vm})
+		return render (request, 'dashboard.html', {'vm':vm , 'all_details':all_details })
 
 	else:                                                                                              #-- Everything works fine
 		index_value = request.session.get('index_value')
@@ -101,6 +106,7 @@ def dashboard (request):
 		ip_list = request.session.get('ip_list')
 		container_type = request.session.get('container_type')
 		service_status = request.session.get('service_status')
+		request.session['no_cluster'] = 'cluster_existed'
 		docker = "docker"
 		all_details = zip(index_value,container_name,ip_list,container_id,container_type,service_status)
 		return render (request, 'dashboard.html',
@@ -135,21 +141,5 @@ def create (request):
 def settings (request):
 	return render (request, 'settings.html')
 
-def clear_cluster (request):
-	sb.getoutput ('docker kill $(docker ps -qa)')
-	sb.getoutput ('docker rm $(docker ps -qa)')
-	container_name = request.session.get('container_name')
-	container_id = request.session.get('container_id')
-	ip_list = request.session.get('ip_list')
-	service_status = request.session.get('service_status')
-	index_value = request.session.get('index_value')
-	request.session['container_name'] = None
-	request.session['container_id'] = None
-	request.session['ip_list'] = None
-	request.session['container_type'] = None
-	request.session['index_value'] = None
-	request.session['service_status'] = None
-	message = "Cluster is cleared"
-	request.session['message'] = message
-	return render (request, 'dashboard.html',{'message':message})
+
 

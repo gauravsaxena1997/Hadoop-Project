@@ -212,3 +212,19 @@ def hv2_playbook (request):
 	
 	open('/etc/ansible/hosts', 'w').close()
 	return HttpResponse(status=201)
+
+def clear_cluster (request):
+	sb.getoutput ('docker kill $(docker ps -qa)')
+	sb.getoutput ('docker rm $(docker ps -qa)')
+	container_name = request.session.get('container_name')
+	container_id = request.session.get('container_id')
+	ip_list = request.session.get('ip_list')
+	service_status = request.session.get('service_status')
+	index_value = request.session.get('index_value')
+	request.session['container_name'] = None
+	request.session['container_id'] = None
+	request.session['ip_list'] = None
+	request.session['container_type'] = None
+	request.session['index_value'] = None
+	request.session['service_status'] = None
+	return redirect ('/dashboard/')

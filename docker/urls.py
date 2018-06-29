@@ -19,4 +19,7 @@ urlpatterns = [
     url(r'^posthadoopv2/$', views.posthadoopv2, name='posthadoopv2'),
     url(r'^hv2_playbook/$', views.hv2_playbook, name='hv2_playbook'),
 
+    # Cluster Clear
+    url(r'^clear_cluster/$', views.clear_cluster, name='clear_cluster'),
+
 ]

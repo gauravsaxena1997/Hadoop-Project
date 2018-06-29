@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^docker/', include('docker.urls') ),
     url(r'^vm/', include('vm.urls') ),
     url(r'^twitter/', include('twitter.urls') ),
-    url(r'^hdfs/', include('hdfs.urls') ),
+    url(r'^client/', include('client.urls') ),
 
 ]
 

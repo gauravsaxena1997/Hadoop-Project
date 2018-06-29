@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Client {% endblock %}
+{% block HDFSactive %} active {% endblock %}
+{% block Clientactive %} active {% endblock %}
+
+<!-- // styles // -->
+{% block style %}  
+.link{
+	color: #595959 ;
+	text-decoration:none;
+}
+.link:hover{
+	color:blue
+}
+.img{
+	position:fixed;
+	bottom:80px;
+	right:55px;
+}
+{% endblock %}
+
+
+<!-- // body // -->
+{% block body %}
+
+{% if no_cluster %}
+
+<center><h1 class="title mt-5"> No cluster is currently running... </h1></center>
+<center><h1 class="title mt-5"> Create a cluster first. </h1></center>
+<img src="{% static 'img/empty.png' %}" class="img-fluid img" height="400px" width="400px">
+
+{% endif %}
+
+
+{% if cluster_existed %}
+<div class="main m-5">
+<h1 class="title p-3"><a href="{% url 'client:new' %}" class="link">
+	<i class="fa fa-plus-square-o" aria-hidden="true"></i> Create a new hadoop client </a>
+</h1>
+<hr>
+<h1 class="title p-3"><a href="{% url 'client:existing' %}" class="link"
+	><i class="fa fa-briefcase" aria-hidden="true"></i> Make existing node a client </a>
+</h1>
+</div>
+
+<div class="img img-fluid">
+	<img src="{% static 'img/client.png' %}" height="400px">
+</div>
+{% endif %}
+
+{% endblock %}

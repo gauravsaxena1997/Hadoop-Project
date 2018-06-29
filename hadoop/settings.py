@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'docker',
     'vm',
     'twitter',
-    'hdfs',
+    'client',
 ]
 
 MIDDLEWARE_CLASSES = [
