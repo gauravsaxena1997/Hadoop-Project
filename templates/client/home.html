@@ -6,20 +6,28 @@
 
 <!-- // styles // -->
 {% block style %}  
-
+.info{
+	font-family: 'Arvo', serif;
+	font-size:130%;
+	padding:15px;
+	background-color:  #c1c5d7  ;
+}
+.del{
+	color:red;
+	cursor:pointer;
+}
 {% endblock %}
 
 
 <!-- // body // -->
 {% block body %}
+<div class="row info">
+	<div class="col-3" style="border-right:1px solid white"><center>Container name: {{client_name}}</center></div>
+	<div class="col-3" style="border-right:1px solid white"><center>IP: {{client_ip}}</center></div>
+	<div class="col-4" style="border-right:1px solid white"><center>Container ID: {{client_id}}</center></div>
+	<div class="col-2" data-toggle="modal" data-target="#delclient" ><center class="del">Delete Client</center></div>
+</div>
 
-
-
-{{client_name}} <br><br>
-{{client_id}} <br><br>
-{{client_ip}} <br><br>
-
-<div class="btn btn-danger m-5" data-toggle="modal" data-target="#delclient" >Delete Client</div>
 
 
 

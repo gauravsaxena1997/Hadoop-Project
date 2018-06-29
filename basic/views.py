@@ -29,8 +29,9 @@ def postsignin (request):
 	                 "WHERE email='{}' and password='{}';".format(email,password) )
 		try:
 			cur.execute (query)
-			x =   fetch = cur.fetchall()
-			print (x)
+			fetch = cur.fetchall()
+			print (fetch[0])
+			request.session['name'] = fetch[0][0]
 			if ( len(fetch)>0 ):
 				print('Success....')
 				return render (request, 'success.html')

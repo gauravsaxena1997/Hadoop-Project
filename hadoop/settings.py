@@ -74,7 +74,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hadoop.wsgi.application'
-
+TEMPLATES[0]['OPTIONS']['context_processors'].append("basic.context_processors.name")
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
