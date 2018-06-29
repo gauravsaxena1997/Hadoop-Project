@@ -7,35 +7,136 @@
 <!-- // styles // -->
 {% block style %}  
 .info{
-	font-family: 'Arvo', serif;
 	font-size:130%;
-	padding:15px;
-	background-color:  #c1c5d7  ;
+	padding:5px;
+	margin:10px;
 }
 .del{
 	color:red;
 	cursor:pointer;
+}
+.main{
+	margin:5px;
+}
+.op{
+	color:blue
 }
 {% endblock %}
 
 
 <!-- // body // -->
 {% block body %}
-<div class="row info">
-	<div class="col-3" style="border-right:1px solid white"><center>Container name: {{client_name}}</center></div>
-	<div class="col-3" style="border-right:1px solid white"><center>IP: {{client_ip}}</center></div>
-	<div class="col-4" style="border-right:1px solid white"><center>Container ID: {{client_id}}</center></div>
-	<div class="col-2" data-toggle="modal" data-target="#delclient" ><center class="del">Delete Client</center></div>
+
+<div class="row align-items-center">
+	<h2 class="title col-5">Hadoop Client Operations</h2>
+	<div class="offset-1 col-2 btn btn-info" data-toggle="modal" data-target="#clientinfo" >Client Info</div>
+	<div class="offset-1 col-2 btn btn-danger" data-toggle="modal" data-target="#delclient" >Delete Client</div>
+</div><hr>
+<div class="main">
+	<div class="op row">
+	  <a href="{% url 'client:ls' %}" class="col-2"><i class="fa fa-list-alt" aria-hidden="true"></i> List directories</a>
+			<div class="col-1"> ( ls )</div>
+	  <a href="{% url 'client:clear_all' %}" class="col-3"><i class="fa fa-trash-o text-danger" aria-hidden="true"> Clear whole cluster data</i> </a>
+	</div><hr>
+	<div class="op">
+		<form action="{% url 'client:cat' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-book" aria-hidden="true"></i> Read file</label>
+			<div class="col-1"> ( cat )</div>
+			<input class="col-6" name="location" placeholder='/path'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="View">
+	    </form><hr>
+	</div>
+	<div class="op">
+		<form action="{% url 'client:count' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-hand-peace-o" aria-hidden="true"></i> Count from files</label>
+			<div class="col-1"> ( count )</div>
+			<input class="col-6" name="location" placeholder='/path'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Count">
+	    </form><hr>
+	</div>
+	<div class="op">
+		<form action="{% url 'client:mkdir' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-plus-circle" aria-hidden="true"></i> Create a directory</label>
+			<div class="col-1"> ( mkdir )</div>
+			<input class="col-6" name="location" placeholder='/path'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Create">
+	    </form><hr>
+	</div>
+	<div class="op">
+		<form action="{% url 'client:rmr' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-minus-circle" aria-hidden="true"></i> Remove a directory</label>
+			<div class="col-1"> ( rmr )</div>
+			<input class="col-6" name="location" placeholder='/path'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Remove">
+	    </form><hr>
+	</div>
+	<div class="op">
+		<form action="{% url 'client:touchz' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-plus-square-o" aria-hidden="true"></i> Create a file</label>
+			<div class="col-1"> ( touchz )</div>
+			<input class="col-6" name="location" placeholder='/path'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Create">
+	    </form><hr>
+	</div>
+	<div class="op">
+		<form action="{% url 'client:rm' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-minus-square-o" aria-hidden="true"></i> Remove a file</label>
+			<div class="col-1"> ( rm )</div>
+			<input class="col-6" name="location" placeholder='/path'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Remove">
+	    </form><hr>
+	</div>
+	<div class="op">
+		<form action="{% url 'client:put' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-upload" aria-hidden="true"></i> Copy from Local</label>
+			<div class="col-1"> ( put )</div>
+			<input class="col-3" name="location_from" placeholder='/from local'>
+			<input class="col-3" name="location_to" placeholder='/to cluster'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Upload">
+	    </form><hr>
+	</div>
+	<div class="op">
+		<form action="{% url 'client:chown' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-user" aria-hidden="true"></i> Change owenership</label>
+			<div class="col-1"> ( chown )</div>
+			<input class="col-3" name="user" placeholder='username'>
+			<input class="col-3" name="location" placeholder='/path'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Change">
+	    </form><hr>
+	</div>
 </div>
 
 
+{% if command %}
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header" style="background-color: #1a90ff;color:white">
+	        <h4 class="modal-title">Output</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    </div>
+        <div class="modal-body p-3"><pre>
+		{{ command }}
+        </pre></div>
+    </div>
+</div>
+{% endif %}
 
 
+<!-- Clear Modal -->
 <div class="modal fade" id="delclient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Clear Client</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Client</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -49,4 +150,38 @@
   </div>
 </div>
 
+
+
+<!-- Info -->
+<div class="modal fade" id="clientinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Client Info</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body title info row">
+      	<div class="col-6">Container name</div>
+      	<div class="col-6">{{client_name}}</div>
+      	<div class="col-6">Client IP</div>
+      	<div class="col-6">{{client_ip}}</div>
+      	<div class="col-6">Container ID</div>
+      	<div class="col-6">{{client_id}}</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+</script>
 {% endblock %}

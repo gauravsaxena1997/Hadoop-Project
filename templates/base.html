@@ -18,17 +18,22 @@
   <!-- Custom styles for this template-->
   <link href="{% static 'css/sb-admin.css' %} " rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Lobster" rel="stylesheet"> 
   {% block header %}  {% endblock %}
 <style type="text/css">
 .title{
   font-family: 'Righteous', cursive;
-}
-.shadow{
+}.shadow{
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-}
-.shadow:hover{
+}.shadow:hover{
    box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+}.user{
+  /*font-family: 'Dancing Script', cursive;*/
+  font-family: 'Lobster', cursive;
+  border-left: 2px solid grey;
+  border-right: 2px solid grey  ;
+  color: white;
 }
 {% block style %}  {% endblock %}
 </style>
@@ -102,18 +107,9 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <h4 class="title  my-2 my-lg-0 mr-lg-2 text-secondary">{{name}}</h4>
-<!--           <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form> -->
+        <li class="nav-item user pr-3 pl-3 mr-3 row align-items-center">
+          <i class="fa fa-user-circle fa-2x pr-3" aria-hidden="true"></i>
+          <h4 style="display:inline">{{name}}</h4>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#Logout">
