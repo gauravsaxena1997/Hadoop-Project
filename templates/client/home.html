@@ -103,6 +103,16 @@
 	    </form><hr>
 	</div>
 	<div class="op">
+		<form action="{% url 'client:moveFromLocal' %}" method="POST" class="row align-items-center">
+			{% csrf_token %}
+			<label class="col-2" href=""><i class="fa fa-scissors" aria-hidden="true"></i> Move from Local</label>
+			<div class="col-1"> ( move )</div>
+			<input class="col-3" name="location_from" placeholder='/from local'>
+			<input class="col-3" name="location_to" placeholder='/to cluster'>
+			<input class="btn btn-sm  offset-1 col-1" type="submit" value="Move">
+	    </form><hr>
+	</div>
+	<div class="op">
 		<form action="{% url 'client:chown' %}" method="POST" class="row align-items-center">
 			{% csrf_token %}
 			<label class="col-2" href=""><i class="fa fa-user" aria-hidden="true"></i> Change owenership</label>

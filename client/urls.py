@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^touchz/$', views.touchz, name='touchz'),
     url(r'^rm/$', views.rm, name='rm'),
     url(r'^put/$', views.put, name='put'),
+    url(r'^moveFromLocal/$', views.moveFromLocal, name='moveFromLocal'),
     url(r'^cat/$', views.cat, name='cat'),
     url(r'^chown/$', views.chown, name='chown'),
     url(r'^count/$', views.count, name='count'),
