@@ -8,7 +8,7 @@ class Django_Secrets:
 
 class Oauth_Secrets:
     def __init__(self):
-	    self.consumer_key =  'h9L0J24kPY8vh7cfLY0RaxVKL'
-	    self.consumer_secret = 'ACf4hfHWnDAZ3UHSaN5fk3S9BqOTYClSneP2IOgOVrz7vLQNHE'
-	    self.access_token = '979709228146294784-mkyrzH8uZ3M4lQcDq4cO3edHxKK00Fz'
-	    self.access_token_secret = 'JuaoVdHyFtg6oZVhGmF7zrx2W9ngUyw4Ls9f27gtmEGwW'
+	    self.consumer_key =  'hqzcXRnqj5AoYr4MvTF9dbeYU'
+	    self.consumer_secret = 'jlTXxVjt3Nc0tA9fDtkwpIwoFXjXzeF4AQtGEDgni8nCy2mNES'
+	    self.access_token = '973076672231587840-Dh6SZrWFo0HcSAC82nNdXieL8ZKwF3R'
+	    self.access_token_secret = 'pVaaWWUYZPrmOatlgAmnQTb26o1WXaQKHBJsOTZzZ94ax'

@@ -1,0 +1,12 @@
+[rhel7rpm]
+baseurl="ftp://192.168.122.1/rhel7rpm"
+gpgcheck=0
+
+[mysoft]
+baseurl="ftp://192.168.122.1/mysoft"
+gpgcheck=0
+
+[ansible]
+baseurl="ftp://192.168.122.1/ansible"
+gpgcheck=0
+

@@ -103,13 +103,13 @@ def hv1_playbook (request):
 	service_type = request.session.get('service_type')
 	print ('ansible playbook is running...')
 	if ( service_type == 'nn_dn' ):
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/onlynndn.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/onlynndn.yml')
 	elif ( service_type == 'nnjt_dntt' ):
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/nnjt_dntt.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/nnjt_dntt.yml')
 	elif ( service_type == 'nn_jt_dntt' ):
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/nn_jt_dntt.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/nn_jt_dntt.yml')
 	else:
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/nn_jt_dn_tt.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/nn_jt_dn_tt.yml')
 	print("Cleaning hosts")
 	open('/etc/ansible/hosts', 'w').close()
 	return HttpResponse(status=201)
@@ -202,13 +202,13 @@ def hv2_playbook (request):
 	print ('ansible playbook is running...')
 	service_type = request.session.get('service_type')
 	if ( service_type == 'nn_dn' ):
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/hv2_nndn.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/hv2_nndn.yml')
 	elif ( service_type == 'nnrm_dnnm' ):
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/nnrm_dnnm.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/nnrm_dnnm.yml')
 	elif ( service_type == 'nn_rm_dnnm' ):
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/nn_rm_dnnm.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/nn_rm_dnnm.yml')
 	else:
-		os.system('sudo ansible-playbook /etc/ansible/playbooks/docker/nn_rm_dn_nm.yml')
+		os.system('sudo ansible-playbook /root/Hadoop-Project/docker/playbooks/nn_rm_dn_nm.yml')
 	
 	open('/etc/ansible/hosts', 'w').close()
 	return HttpResponse(status=201)

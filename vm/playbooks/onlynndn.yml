@@ -1,0 +1,33 @@
+---
+- hosts: vm-dn
+  tasks:
+   - name: copy hdfs-site 
+     copy:
+        src: /root/Hadoop-Project/source_files/vm_hv1/hdfs-site-dn.xml
+        dest: /etc/hadoop/hdfs-site.xml
+
+   - name: copy core-site 
+     copy:
+        src: /root/Hadoop-Project/source_files/vm_hv1/core-site.xml
+        dest: /etc/hadoop/core-site.xml
+
+   - name: starting datanode
+     shell: hadoop-daemon.sh start datanode 
+
+# - hosts: vm-nn
+#   tasks:
+#    - name: copy hdfs-site 
+#      copy:
+#         src: /root/Hadoop-Project/source_files/vm_hv1/hdfs-site-nn.xml
+#         dest: /etc/hadoop/hdfs-site.xml
+
+#    - name: copy core-site 
+#      copy:
+#         src: /root/Hadoop-Project/source_files/vm_hv1/core-site.xml
+#         dest: /etc/hadoop/core-site.xml
+
+#    - name: format namenode
+#      shell: hadoop namenode -format
+
+#    - name: starting namenode
+#      shell: hadoop-daemon.sh start namenode

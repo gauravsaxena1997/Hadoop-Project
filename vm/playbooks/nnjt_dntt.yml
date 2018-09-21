@@ -1,0 +1,47 @@
+---
+- hosts: vm-jt
+  tasks:
+   - name: starting services
+     shell: hadoop-daemon.sh start jobtracker
+
+- hosts: vm-dn-tt
+  tasks:
+   - name: copy hdfs-site 
+     copy:
+        src: /root/Hadoop-Project/source_files/vm_hv1/hdfs-site-dn.xml
+        dest: /etc/hadoop/hdfs-site.xml
+
+   - name: copy core-site 
+     copy:
+        src: /root/Hadoop-Project/source_files/vm_hv1/core-site.xml
+        dest: /etc/hadoop/core-site.xml
+
+   - name: copy mapred-site 
+     copy:
+        src: /root/Hadoop-Project/source_files/vm_hv1/mapred-site.xml
+        dest: /etc/hadoop/mapred-site.xml
+
+   - name: starting services
+     shell: hadoop-daemon.sh start datanode ; hadoop-daemon.sh start tasktracker
+# - hosts: vm-nn
+#   tasks:
+#    - name: copy hdfs-site 
+#      copy:
+#         src: /root/Hadoop-Project/source_files/vm_hv1/hdfs-site-nn.xml
+#         dest: /etc/hadoop/hdfs-site.xml
+
+#    - name: copy core-site 
+#      copy:
+#         src: /root/Hadoop-Project/source_files/vm_hv1/core-site.xml
+#         dest: /etc/hadoop/core-site.xml
+
+#    - name: copy mapred-site 
+#      copy:
+#         src: /root/Hadoop-Project/source_files/vm_hv1/mapred-site.xml
+#         dest: /etc/hadoop/mapred-site.xml
+
+#    - name: format namenode
+#      command: hadoop namenode -format
+
+#    - name: starting services
+#      shell: hadoop-daemon.sh start namenode ; hadoop-daemon.sh start jobtracker

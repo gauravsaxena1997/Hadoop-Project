@@ -1,0 +1,39 @@
+---
+- hosts: docker-nn
+  tasks:
+   - name: iptables
+     command: iptables -F
+
+   - name: copy hdfs-site 
+     copy:
+        src: /root/docker_hv2/hdfs-site-nn.xml
+        dest: /hadoop2/etc/hadoop/hdfs-site.xml
+
+   - name: copy core-site 
+     copy:
+        src: /root/docker_hv2/core-site.xml
+        dest: /hadoop2/etc/hadoop/core-site.xml
+
+   - name: format namenode
+     command: hdfs namenode -format
+
+   - name: starting namenode
+     command: hadoop-daemon.sh start namenode
+
+- hosts: docker-dn
+  tasks:
+   - name: iptables
+     command: iptables -F
+
+   - name: copy hdfs-site 
+     copy:
+        src: /root/docker_hv2/hdfs-site-dn.xml
+        dest: /hadoop2/etc/hadoop/hdfs-site.xml
+
+   - name: copy core-site 
+     copy:
+        src: /root/docker_hv2/core-site.xml
+        dest: /hadoop2/etc/hadoop/core-site.xml
+
+   - name: starting datanode
+     command: hadoop-daemon.sh start datanode	
